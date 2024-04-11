@@ -7,8 +7,7 @@ import { EditOrderItemDialog } from "./EditOrderItemDialog";
 import ShoppingCartContext from './Contexts/ShoppingCartContext';
 
 
-const GET_PRODUCTS_URL = 'https://localhost:7254/api/Products';
-
+const GET_PRODUCTS_URL = import.meta.env.VITE_GET_PRODUCTS_API_URL;
 
 export const ProductList = () => {
     const { findFromCart } = useContext(ShoppingCartContext);
@@ -49,7 +48,7 @@ export const ProductList = () => {
                         </Box>
                         :
                         <List sx={{ width: '100%' }}>
-                            {products != null ? products.map(product => {
+                            {products != null ? products.map((product, index) => {
 
                                 let productInCart = findFromCart(product.productId);
 
@@ -90,7 +89,7 @@ export const ProductList = () => {
                                                 </Stack>
                                             </Stack>
                                         </ListItem>
-                                        <Divider />
+                                        { index < products.length -1 ? <Divider /> : ''}
                                     </Box>
                                 )
                             })
