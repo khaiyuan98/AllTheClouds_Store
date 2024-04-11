@@ -7,7 +7,7 @@ export const MyLayout = () => {
     const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
     return (
-        <div style={{ width: '100%' }}>
+        <div style={{ width: '100%', paddingBottom: '50px' }}>
             <MyAppBar />
             <Offset />
             <div style={{ padding: '10px' }}>

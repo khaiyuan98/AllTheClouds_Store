@@ -5,6 +5,7 @@ import axios from 'axios';
 import { ListItem, ListItemText, Typography, Button, Stack } from "@mui/material";
 import { EditOrderItemDialog } from "./EditOrderItemDialog";
 import ShoppingCartContext from './Contexts/ShoppingCartContext';
+import { formatCurrency } from "../helpers/helpers";
 
 
 const GET_PRODUCTS_URL = import.meta.env.VITE_GET_PRODUCTS_API_URL;
@@ -67,7 +68,7 @@ export const ProductList = () => {
                                                                 In Cart - {productInCart.quantity}
                                                             </Typography>
                                                             <Typography variant="body2" className="subtitle">
-                                                                Cost - ${(product.unitPrice * productInCart.quantity).toFixed(2)}
+                                                                Cost - ${formatCurrency(product.unitPrice * productInCart.quantity)}
                                                             </Typography>
                                                         </>
                                                         : ''}
@@ -79,7 +80,7 @@ export const ProductList = () => {
                                                         variant="h6"
                                                         color="text.primary"
                                                     >
-                                                        ${product.unitPrice}
+                                                        ${formatCurrency(product.unitPrice)}
                                                     </Typography>
                                                     <Button variant="contained"
                                                         onClick={() => openItemDialog(product)}

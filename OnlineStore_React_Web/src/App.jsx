@@ -7,6 +7,7 @@ import { MyLayout } from './components/Layouts/MyLayout';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { ShoppingCartProvider } from './components/Contexts/ShoppingCartContext';
+import { PlaceOrderPage } from './pages/PlaceOrderPage';
 
 // TODO From redux
 const isDarkMode = false;
@@ -24,6 +25,7 @@ function App() {
                     <Routes>
                         <Route element={<MyLayout />}>
                             <Route path="/" element={<HomePage />} />
+                            <Route path="/placeorder" element={<PlaceOrderPage />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>
