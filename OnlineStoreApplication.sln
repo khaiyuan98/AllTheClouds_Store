@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore_Web_API", "OnlineStore_Web_API\OnlineStore_Web_API.csproj", "{67269CC3-BB85-4AC0-9349-D6D0543193F8}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "OnlineStore_React_Web", "OnlineStore_React_Web\OnlineStore_React_Web.esproj", "{ED05DAD9-A471-4F4A-9B31-CB032BCC443A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67269CC3-BB85-4AC0-9349-D6D0543193F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67269CC3-BB85-4AC0-9349-D6D0543193F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67269CC3-BB85-4AC0-9349-D6D0543193F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67269CC3-BB85-4AC0-9349-D6D0543193F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED05DAD9-A471-4F4A-9B31-CB032BCC443A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED05DAD9-A471-4F4A-9B31-CB032BCC443A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED05DAD9-A471-4F4A-9B31-CB032BCC443A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ED05DAD9-A471-4F4A-9B31-CB032BCC443A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED05DAD9-A471-4F4A-9B31-CB032BCC443A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED05DAD9-A471-4F4A-9B31-CB032BCC443A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {52D905C3-1D9A-4227-B614-41A2C0BEA649}
+	EndGlobalSection
+EndGlobal
