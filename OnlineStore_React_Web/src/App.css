@@ -9,6 +9,10 @@
     min-width: 100%;
 }
 
+.subtitle {
+    color: grey;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
