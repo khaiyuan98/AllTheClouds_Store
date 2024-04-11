@@ -71,6 +71,31 @@ namespace AllTheClouds_Web_API.Services
             }
         }
 
+        public async Task<IEnumerable<ProductDto>?> GetProductList(string currency)
+        {
+            IEnumerable<ProductDto>? products = await GetProductList();
+            if (products is null)
+                return null;
+
+            if (currency == "AUD")
+                return products;
+
+            IEnumerable<FxRateDto>? fxRates = await GetFxRates();
+            if (fxRates is null)
+                return null;
+
+            FxRateDto? fxRate = fxRates.FirstOrDefault(x => x.targetCurrency == currency && x.sourceCurrency == "AUD");
+            if (fxRate is null)
+                return null;
+
+            foreach (ProductDto product in products)
+            {
+                product.basePrice *= fxRate.rate;
+            }
+
+            return products;
+        }
+
         public async Task<IEnumerable<FxRateDto>?> GetFxRates() 
         {
             using (HttpClient httpClient = AllTheClouds_API_HttpClient())

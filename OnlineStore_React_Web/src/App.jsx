@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { ShoppingCartProvider } from './components/Contexts/ShoppingCartContext';
 import { PlaceOrderPage } from './pages/PlaceOrderPage';
+import { UserPreferenceProvider } from './components/Contexts/UserPreferenceContext';
 
 // TODO From redux
 const isDarkMode = false;
@@ -20,16 +21,18 @@ function App() {
         <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            <ShoppingCartProvider>
-                <BrowserRouter>
-                    <Routes>
-                        <Route element={<MyLayout />}>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/placeorder" element={<PlaceOrderPage />} />
-                        </Route>
-                    </Routes>
-                </BrowserRouter>
-            </ShoppingCartProvider>
+            <UserPreferenceProvider>
+                <ShoppingCartProvider>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route element={<MyLayout />}>
+                                <Route path="/" element={<HomePage />} />
+                                <Route path="/placeorder" element={<PlaceOrderPage />} />
+                            </Route>
+                        </Routes>
+                    </BrowserRouter>
+                </ShoppingCartProvider>
+            </UserPreferenceProvider>
         </ThemeProvider>
     );
 }

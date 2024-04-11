@@ -1,4 +1,3 @@
-// ShoppingCartContext.js
 import { createContext, useState, useEffect } from 'react';
 
 const ShoppingCartContext = createContext();

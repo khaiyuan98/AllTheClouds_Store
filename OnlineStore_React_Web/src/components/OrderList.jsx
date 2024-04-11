@@ -7,17 +7,20 @@ import ShoppingCartContext from './Contexts/ShoppingCartContext';
 import { QuantityInput } from "./MaterialCustom/NumberInput";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { formatCurrency } from "../helpers/helpers";
+import UserPreferenceContext from "./Contexts/UserPreferenceContext";
 
 export const OrderList = () => {
     const GET_PRODUCTS_URL = import.meta.env.VITE_GET_PRODUCTS_API_URL;
 
+    const { currency, currencySymbol } = useContext(UserPreferenceContext);
     const { cart, updateCart } = useContext(ShoppingCartContext);
 
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const getProducts = () => {
-        axios.get(GET_PRODUCTS_URL)
+        setIsLoading(true);
+        axios.get(`${GET_PRODUCTS_URL}/${currency}`)
             .then(res => {
                 setProducts(res.data);
             })
@@ -30,7 +33,7 @@ export const OrderList = () => {
 
     useEffect(() => {
         getProducts();
-    }, []);
+    }, [currency]);
 
     const getProduct = (productId) => {
         const existingProductIndex = products.findIndex((product) => product.productId === productId);
@@ -84,7 +87,7 @@ export const OrderList = () => {
                                                     variant="h6"
                                                     color="text.primary"
                                                 >
-                                                    ${formatCurrency(product.unitPrice * order.quantity)}
+                                                    {currencySymbol}{formatCurrency(product.unitPrice * order.quantity)}
                                                 </Typography>
                                                 <QuantityInput defaultValue={order.quantity} min={1} max={product?.maximumQuantity ?? 999} onChangeHandler={(value) => updateCart(order.productId, value)} />
                                                 <IconButton aria-label="delete" color="error" onClick={() => updateCart(order.productId, 0)}>
@@ -101,7 +104,7 @@ export const OrderList = () => {
                 }
                 <Box sx={{ display: 'flex', justifyContent: 'end', padding: '10px' }} >
                     <Typography variant="h6">
-                        TOTAL: ${formatCurrency(calculateTotalPrice())}
+                        TOTAL: {currencySymbol}{formatCurrency(calculateTotalPrice())}
                     </Typography>
                 </Box>
             </Box>

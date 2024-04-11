@@ -24,5 +24,13 @@ namespace AllTheClouds_Web_API.Controllers
             IEnumerable<ProductDto>? products = await _storeService.GetProductList();
             return products is not null ? Ok(products) : NotFound("No products could be found");
         }
+
+        [HttpGet]
+        [Route("{currency}")]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductList(string currency)
+        {
+            IEnumerable<ProductDto>? products = await _storeService.GetProductList(currency);
+            return products is not null ? Ok(products) : NotFound("No products could be found in this currency");
+        }
     }
 }

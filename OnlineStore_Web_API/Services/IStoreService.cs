@@ -8,6 +8,7 @@ namespace AllTheClouds_Web_API.Services
     {
         Task<IEnumerable<FxRateDto>?> GetFxRates();
         Task<IEnumerable<ProductDto>?> GetProductList();
+        Task<IEnumerable<ProductDto>?> GetProductList(string currency);
         Task<bool> SubmitOrder(OrderDto order);
     }
 }

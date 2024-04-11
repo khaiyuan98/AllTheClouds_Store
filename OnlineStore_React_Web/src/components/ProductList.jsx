@@ -6,11 +6,14 @@ import { ListItem, ListItemText, Typography, Button, Stack } from "@mui/material
 import { EditOrderItemDialog } from "./EditOrderItemDialog";
 import ShoppingCartContext from './Contexts/ShoppingCartContext';
 import { formatCurrency } from "../helpers/helpers";
+import UserPreferenceContext from "./Contexts/UserPreferenceContext";
 
 
-const GET_PRODUCTS_URL = import.meta.env.VITE_GET_PRODUCTS_API_URL;
 
 export const ProductList = () => {
+    const GET_PRODUCTS_URL = import.meta.env.VITE_GET_PRODUCTS_API_URL;
+
+    const { currency, currencySymbol } = useContext(UserPreferenceContext);
     const { findFromCart } = useContext(ShoppingCartContext);
 
     const [products, setProducts] = useState([]);
@@ -20,7 +23,8 @@ export const ProductList = () => {
     const [chosenProduct, setChosenProduct] = useState(null);
 
     const getProducts = () => {
-        axios.get(GET_PRODUCTS_URL)
+        setIsLoading(true);
+        axios.get(`${GET_PRODUCTS_URL}/${currency}`)
             .then(res => {
                 setProducts(res.data);
             })
@@ -32,7 +36,7 @@ export const ProductList = () => {
     };
     useEffect(() => {
         getProducts();
-    }, []);
+    }, [currency]);
 
     const openItemDialog = (product) => {
         setChosenProduct(product);
@@ -66,7 +70,7 @@ export const ProductList = () => {
                                                         {
                                                             productInCart != null ?
                                                                 <Typography color="secondary" variant="body2" className="subtitle">
-                                                                    Quantity: {productInCart.quantity} (${formatCurrency(product.unitPrice * productInCart.quantity)})
+                                                                    Quantity: {productInCart.quantity} ({currencySymbol}{formatCurrency(product.unitPrice * productInCart.quantity)})
                                                                 </Typography>
                                                                 : ''
                                                         }
@@ -81,7 +85,7 @@ export const ProductList = () => {
                                                         variant="h6"
                                                         color="text.primary"
                                                     >
-                                                        ${formatCurrency(product.unitPrice)}
+                                                        {currencySymbol}{formatCurrency(product.unitPrice)}
                                                     </Typography>
                                                     <Button variant="contained"
                                                         onClick={() => openItemDialog(product)}
