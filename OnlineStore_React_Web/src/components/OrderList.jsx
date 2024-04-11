@@ -96,7 +96,7 @@ export const OrderList = () => {
                                     </Box>
                                 )
                             })
-                                : 'Your Cart is Empty'}
+                                : 'Your Order is Empty'}
                         </List>
                 }
                 <Box sx={{ display: 'flex', justifyContent: 'end', padding: '10px' }} >

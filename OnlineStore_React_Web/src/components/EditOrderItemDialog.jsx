@@ -36,7 +36,7 @@ export const EditOrderItemDialog = ({ open, setIsDialogOpen, product}) => {
             <DialogTitle id="alert-dialog-title">
                 {product?.name}
             </DialogTitle>
-            <DialogContent>
+            <DialogContent dividers>
                 Order Quantity: <QuantityInput defaultValue={initValue} min={0} max={product?.maximumQuantity ?? 999} onChangeHandler={(value) => setQuantity(value)} />
             </DialogContent>
             <DialogActions>

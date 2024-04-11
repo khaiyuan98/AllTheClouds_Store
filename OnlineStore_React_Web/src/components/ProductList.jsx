@@ -58,21 +58,22 @@ export const ProductList = () => {
                                         <ListItem alignItems="flex-start" >
                                             <ListItemText
                                                 primary={product.name}
-                                                secondary={product.description}
+                                                secondary={
+                                                    <>
+                                                        <Typography variant="body2" className="subtitle">
+                                                            {product.description}
+                                                        </Typography>
+                                                        {
+                                                            productInCart != null ?
+                                                                <Typography color="secondary" variant="body2" className="subtitle">
+                                                                    Quantity: {productInCart.quantity} (${formatCurrency(product.unitPrice * productInCart.quantity)})
+                                                                </Typography>
+                                                                : ''
+                                                        }
+                                                    </>
+                                                }
                                             />
                                             <Stack direction="row" spacing={2}>
-                                                <Stack>
-                                                    {productInCart != null ?
-                                                        <>
-                                                            <Typography variant="body2" className="subtitle">
-                                                                In Cart - {productInCart.quantity}
-                                                            </Typography>
-                                                            <Typography variant="body2" className="subtitle">
-                                                                Cost - ${formatCurrency(product.unitPrice * productInCart.quantity)}
-                                                            </Typography>
-                                                        </>
-                                                        : ''}
-                                                </Stack>
                                                 <Stack spacing={0} alignItems="center">
                                                     <Typography
                                                         sx={{ display: 'inline' }}
@@ -90,7 +91,7 @@ export const ProductList = () => {
                                                 </Stack>
                                             </Stack>
                                         </ListItem>
-                                        { index < products.length -1 ? <Divider /> : ''}
+                                        {index < products.length - 1 ? <Divider /> : ''}
                                     </Box>
                                 )
                             })
