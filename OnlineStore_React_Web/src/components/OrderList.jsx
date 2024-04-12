@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { List, Divider, Box } from "@mui/material";
-import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
-import { ListItem, ListItemText, Typography, Stack, IconButton } from "@mui/material";
+import { ListItem, ListItemText, Typography, Stack, IconButton, Skeleton } from "@mui/material";
 import ShoppingCartContext from './Contexts/ShoppingCartContext';
 import { QuantityInput } from "./MaterialCustom/NumberInput";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -64,8 +63,17 @@ export const OrderList = () => {
             <Box sx={{ width: '100%' }}>
                 {
                     isLoading ?
-                        <Box className="center">
-                            <CircularProgress />
+                        <Box sx={{ padding: '10px' }}>
+                            <Skeleton variant="rectangular" animation="wave" width="15%" height={25} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="100%" height={50} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="15%" height={25} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="100%" height={50} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="15%" height={25} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="100%" height={50} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="15%" height={25} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="100%" height={50} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="15%" height={25} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="100%" height={50} sx={{ mb: '10px' }} />
                         </Box>
                         :
                         <List sx={{ width: '100%' }}>

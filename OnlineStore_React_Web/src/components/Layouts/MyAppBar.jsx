@@ -1,8 +1,10 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppBar, Box, Toolbar, Typography, Select, MenuItem } from "@mui/material";
 import UserPreferenceContext from '../Contexts/UserPreferenceContext';
 export const MyAppBar = () => {
     const { currency, setCurrency } = useContext(UserPreferenceContext);
+    const navigate = useNavigate();
 
     const handleChangeCurrency = (e) => {
         setCurrency(e.target.value);
@@ -14,7 +16,7 @@ export const MyAppBar = () => {
             elevation={1}
         >
             <Toolbar>
-                <Typography>
+                <Typography onClick={() => navigate('/')} >
                     All The Clouds Store
                 </Typography>
                 <Box sx={{ flexGrow: 1 }} />

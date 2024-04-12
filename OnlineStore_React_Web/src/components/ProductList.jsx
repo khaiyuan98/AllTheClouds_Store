@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { List, Divider, Box } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
-import { ListItem, ListItemText, Typography, Button, Stack } from "@mui/material";
+import { ListItem, ListItemText, Typography, Button, Stack, Snackbar, Alert, Skeleton } from "@mui/material";
 import { EditOrderItemDialog } from "./EditOrderItemDialog";
 import ShoppingCartContext from './Contexts/ShoppingCartContext';
 import { formatCurrency } from "../helpers/helpers";
@@ -22,13 +22,21 @@ export const ProductList = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [chosenProduct, setChosenProduct] = useState(null);
 
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [alertSettings, setAlertSettings] = useState({});
+
     const getProducts = () => {
         setIsLoading(true);
         axios.get(`${GET_PRODUCTS_URL}/${currency}`)
             .then(res => {
                 setProducts(res.data);
             })
-            .catch(error => {
+            .catch(() => {
+                setAlertSettings({
+                    message: 'The products could not be loaded at this time',
+                    severity: 'error'
+                });
+                setIsAlertOpen(true);
             })
             .finally(() => {
                 setIsLoading(false);
@@ -45,11 +53,20 @@ export const ProductList = () => {
 
     return (
         <>
-            <Box sx={{ minHeight: '500px', width: '100%' }}>
+            <Box sx={{ width: '100%' }}>
                 {
                     isLoading ?
-                        <Box className="center">
-                            <CircularProgress />
+                        <Box sx={{ padding: '10px' }}>
+                            <Skeleton variant="rectangular" animation="wave" width="15%" height={25} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="100%" height={50} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="15%" height={25} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="100%" height={50} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="15%" height={25} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="100%" height={50} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="15%" height={25} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="100%" height={50} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="15%" height={25} sx={{ mb: '10px' }} />
+                            <Skeleton variant="rectangular" animation="wave" width="100%" height={50} sx={{ mb: '10px' }} />
                         </Box>
                         :
                         <List sx={{ width: '100%' }}>
@@ -61,21 +78,21 @@ export const ProductList = () => {
                                     <Box key={product.productId}>
                                         <ListItem alignItems="flex-start" >
                                             <ListItemText
-                                                primary={product.name}
-                                                secondary={
+                                                primary={
                                                     <>
                                                         <Typography variant="body2" className="subtitle">
-                                                            {product.description}
+                                                            {product.name}
                                                         </Typography>
                                                         {
                                                             productInCart != null ?
                                                                 <Typography color="secondary" variant="body2" className="subtitle">
-                                                                    Quantity: {productInCart.quantity} ({currencySymbol}{formatCurrency(product.unitPrice * productInCart.quantity)})
+                                                                    In Cart: {productInCart.quantity} ({currencySymbol}{formatCurrency(product.unitPrice * productInCart.quantity)})
                                                                 </Typography>
                                                                 : ''
                                                         }
                                                     </>
                                                 }
+                                                secondary={product.description}
                                             />
                                             <Stack direction="row" spacing={2}>
                                                 <Stack spacing={0} alignItems="center">
@@ -104,6 +121,15 @@ export const ProductList = () => {
                 }
             </Box>
             <EditOrderItemDialog open={isDialogOpen} setIsDialogOpen={setIsDialogOpen} product={chosenProduct} />
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                open={isAlertOpen}
+                onClose={() => setIsAlertOpen(false)}
+            >
+                <Alert onClose={() => setIsAlertOpen(false)} severity={alertSettings.severity} sx={{ width: '100%' }}>
+                    {alertSettings.message}
+                </Alert>
+            </Snackbar>
         </>
     )
 } 
