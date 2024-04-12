@@ -14,4 +14,7 @@
     <Folder Include="src\helpers\" />
     <Folder Include="src\themes\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".vscode\launch.json" />
+  </ItemGroup>
 </Project>
