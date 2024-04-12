@@ -9,6 +9,7 @@ import { HomePage } from './pages/HomePage';
 import { ShoppingCartProvider } from './components/Contexts/ShoppingCartContext';
 import { PlaceOrderPage } from './pages/PlaceOrderPage';
 import { UserPreferenceProvider } from './components/Contexts/UserPreferenceContext';
+import { OrderCompletePage } from './pages/OrderCompletePage';
 
 // TODO From redux
 const isDarkMode = false;
@@ -28,6 +29,7 @@ function App() {
                             <Route element={<MyLayout />}>
                                 <Route path="/" element={<HomePage />} />
                                 <Route path="/placeorder" element={<PlaceOrderPage />} />
+                                <Route path="/ordercomplete" element={<OrderCompletePage />} />
                             </Route>
                         </Routes>
                     </BrowserRouter>

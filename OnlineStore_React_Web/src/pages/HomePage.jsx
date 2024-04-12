@@ -17,8 +17,8 @@ export const HomePage = () => {
     return (
 
         <Box className="page-container">
-            <Typography variant="h6" noWrap component="div">
-                Cloud Products
+            <Typography variant="h4" noWrap component="div">
+                Product List
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'end', pb: '10px' }} >
                 <IconButton color="primary" onClick={() => setIsDialogOpen(true)} >

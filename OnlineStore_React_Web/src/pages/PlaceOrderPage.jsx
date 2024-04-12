@@ -34,13 +34,7 @@ export const PlaceOrderPage = () => {
         })
             .then(() => {
                 clearCart();
-
-                setAlertSettings({
-                    message: 'Your order has been submitted',
-                    severity: 'success'
-                });
-
-                setIsAlertOpen(true);
+                navigate('ordercomplete');
             })
             .catch(() => {
                 setAlertSettings({
@@ -88,8 +82,8 @@ export const PlaceOrderPage = () => {
     return (
         <>
             <Box className="page-container">
-                <Typography variant="h6" noWrap component="div">
-                    Finalize Order
+                <Typography variant="h4" noWrap component="div">
+                    Checkout
                 </Typography>
                 <Button
                     startIcon={<ArrowBackIosNewIcon />}

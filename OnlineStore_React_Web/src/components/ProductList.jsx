@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { List, Divider, Box } from "@mui/material";
-import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 import { ListItem, ListItemText, Typography, Button, Stack, Snackbar, Alert, Skeleton } from "@mui/material";
 import { EditOrderItemDialog } from "./EditOrderItemDialog";

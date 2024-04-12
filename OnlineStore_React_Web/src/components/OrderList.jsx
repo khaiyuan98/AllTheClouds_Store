@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { List, Divider, Box } from "@mui/material";
 import axios from 'axios';
-import { ListItem, ListItemText, Typography, Stack, IconButton, Skeleton } from "@mui/material";
+import { ListItem, ListItemText, Typography, Stack, IconButton, Skeleton, Snackbar, Alert } from "@mui/material";
 import ShoppingCartContext from './Contexts/ShoppingCartContext';
 import { QuantityInput } from "./MaterialCustom/NumberInput";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -17,13 +17,21 @@ export const OrderList = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [alertSettings, setAlertSettings] = useState({});
+
     const getProducts = () => {
         setIsLoading(true);
         axios.get(`${GET_PRODUCTS_URL}/${currency}`)
             .then(res => {
                 setProducts(res.data);
             })
-            .catch(error => {
+            .catch(() => {
+                setAlertSettings({
+                    message: 'The products details could not be retrieved',
+                    severity: 'error'
+                });
+                setIsAlertOpen(true);
             })
             .finally(() => {
                 setIsLoading(false);
@@ -115,6 +123,15 @@ export const OrderList = () => {
                         TOTAL: {currencySymbol}{formatCurrency(calculateTotalPrice())}
                     </Typography>
                 </Box>
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    open={isAlertOpen}
+                    onClose={() => setIsAlertOpen(false)}
+                >
+                    <Alert onClose={() => setIsAlertOpen(false)} severity={alertSettings.severity} sx={{ width: '100%' }}>
+                        {alertSettings.message}
+                    </Alert>
+                </Snackbar>
             </Box>
         </>
     )
