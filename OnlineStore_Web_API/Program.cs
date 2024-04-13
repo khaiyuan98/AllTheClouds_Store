@@ -33,6 +33,12 @@ builder.Services.AddCors(c =>
 // Add AllTheClouds Services
 builder.Services.AddScoped<IStoreService, StoreService>();
 
+// Swagger Configuration
+builder.Services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+{
+    Title = "Online Store Web API"
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
