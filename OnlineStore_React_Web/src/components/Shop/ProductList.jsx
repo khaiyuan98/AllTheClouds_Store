@@ -3,9 +3,9 @@ import { List, Divider, Box } from "@mui/material";
 import axios from 'axios';
 import { ListItem, ListItemText, Typography, Button, Stack, Snackbar, Alert, Skeleton } from "@mui/material";
 import { EditOrderItemDialog } from "./EditOrderItemDialog";
-import ShoppingCartContext from './Contexts/ShoppingCartContext';
-import { formatCurrency } from "../helpers/helpers";
-import UserPreferenceContext from "./Contexts/UserPreferenceContext";
+import ShoppingCartContext from '../Contexts/ShoppingCartContext';
+import { formatCurrency } from "../../helpers/helpers";
+import UserPreferenceContext from "../Contexts/UserPreferenceContext";
 
 
 

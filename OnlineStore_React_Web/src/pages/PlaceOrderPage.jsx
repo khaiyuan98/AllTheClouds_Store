@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import ShoppingCartContext from "../components/Contexts/ShoppingCartContext";
 import { Box, Paper, Typography, Button, TextField, Snackbar, Alert } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import { OrderList } from '../components/OrderList';
+import { OrderList } from '../components/Shop/OrderList';
 import { validateEmail } from '../helpers/helpers';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 

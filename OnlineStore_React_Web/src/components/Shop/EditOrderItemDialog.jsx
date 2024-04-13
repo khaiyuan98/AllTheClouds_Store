@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, Typography } from "@mui/material"
-import { QuantityInput } from "./MaterialCustom/NumberInput";
-import ShoppingCartContext from "./Contexts/ShoppingCartContext";
+import { QuantityInput } from "../MaterialCustom/NumberInput";
+import ShoppingCartContext from "../Contexts/ShoppingCartContext";
 
 
 export const EditOrderItemDialog = ({ open, setIsDialogOpen, product }) => {

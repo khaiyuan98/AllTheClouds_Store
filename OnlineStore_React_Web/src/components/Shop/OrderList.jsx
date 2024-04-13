@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { List, Divider, Box } from "@mui/material";
 import axios from 'axios';
-import { ListItem, ListItemText, Typography, Stack, IconButton, Skeleton, Snackbar, Alert, Paper } from "@mui/material";
-import ShoppingCartContext from './Contexts/ShoppingCartContext';
-import { QuantityInput } from "./MaterialCustom/NumberInput";
+import { ListItem, ListItemText, Typography, Stack, IconButton, Skeleton, Snackbar, Alert } from "@mui/material";
+import ShoppingCartContext from '../Contexts/ShoppingCartContext';
+import { QuantityInput } from "../MaterialCustom/NumberInput";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { formatCurrency } from "../helpers/helpers";
-import UserPreferenceContext from "./Contexts/UserPreferenceContext";
-import emptyCartImage from '../assets/images/empty_cart.png';
+import { formatCurrency } from "../../helpers/helpers";
+import UserPreferenceContext from "../Contexts/UserPreferenceContext";
+import emptyCartImage from '../../assets/images/empty_cart.png';
 
 export const OrderList = () => {
     const GET_PRODUCTS_URL = import.meta.env.VITE_GET_PRODUCTS_API_URL;

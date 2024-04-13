@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShoppingCartContext from "../components/Contexts/ShoppingCartContext";
-import { ProductList } from "../components/ProductList";
+import { ProductList } from "../components/Shop/ProductList";
 import { Box, Paper, Typography, Button, IconButton } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { OrderListDialog } from "../components/OrderListDialog";
+import { OrderListDialog } from "../components/Shop/OrderListDialog";
 
 
 export const HomePage = () => {
