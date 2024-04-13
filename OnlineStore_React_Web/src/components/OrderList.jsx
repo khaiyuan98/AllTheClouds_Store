@@ -1,12 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { List, Divider, Box } from "@mui/material";
 import axios from 'axios';
-import { ListItem, ListItemText, Typography, Stack, IconButton, Skeleton, Snackbar, Alert } from "@mui/material";
+import { ListItem, ListItemText, Typography, Stack, IconButton, Skeleton, Snackbar, Alert, Paper } from "@mui/material";
 import ShoppingCartContext from './Contexts/ShoppingCartContext';
 import { QuantityInput } from "./MaterialCustom/NumberInput";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { formatCurrency } from "../helpers/helpers";
 import UserPreferenceContext from "./Contexts/UserPreferenceContext";
+import emptyCartImage from '../assets/images/empty_cart.png';
 
 export const OrderList = () => {
     const GET_PRODUCTS_URL = import.meta.env.VITE_GET_PRODUCTS_API_URL;
@@ -107,7 +108,7 @@ export const OrderList = () => {
                                                 </Typography>
                                                 <QuantityInput defaultValue={order.quantity} min={1} max={product?.maximumQuantity ?? 999} onChangeHandler={(value) => updateCart(order.productId, value)} />
                                                 <IconButton aria-label="delete" color="error" onClick={() => updateCart(order.productId, 0)}>
-                                                    <DeleteIcon/>
+                                                    <DeleteIcon />
                                                 </IconButton>
                                             </Stack>
                                         </ListItem>
@@ -115,7 +116,15 @@ export const OrderList = () => {
                                     </Box>
                                 )
                             })
-                                : 'Your Order is Empty'}
+                                :
+                                <Box className="center" sx={{mt:'10px'}} >
+                                    <Stack alignItems="center" gap={2}>
+                                        <img src={emptyCartImage} style={{ width: '400px', height: 'auto' }} />
+                                        <Typography variant="h6">
+                                            Oops! Looks like your cart is empty
+                                        </Typography>
+                                    </Stack>
+                                </Box>}
                         </List>
                 }
                 <Box sx={{ display: 'flex', justifyContent: 'end', padding: '10px' }} >

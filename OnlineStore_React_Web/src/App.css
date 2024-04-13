@@ -1,8 +1,6 @@
 .center {
     display: flex;
-    position: relative;
-    top: 50%;
-    left: 50%;
+    justify-content: center;
 }
 
 .page-container {

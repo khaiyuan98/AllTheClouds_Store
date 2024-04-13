@@ -34,7 +34,7 @@ export const PlaceOrderPage = () => {
         })
             .then(() => {
                 clearCart();
-                navigate('ordercomplete');
+                navigate('/ordercomplete');
             })
             .catch(() => {
                 setAlertSettings({
@@ -90,7 +90,7 @@ export const PlaceOrderPage = () => {
                     onClick={() => navigate('/')}
                     sx={{ mb: '10px' }}
                 >
-                    Back to Products List
+                    Back to Product List
                 </Button>
                 <Paper>
                     <Box>
@@ -99,6 +99,7 @@ export const PlaceOrderPage = () => {
                 </Paper>
                 <Paper>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, padding: '10px' }}>
+                        <Typography>Please fill in your details below to submit your order</Typography>
                         <TextField
                             onChange={(e) => setCustomerName(e.target.value)}
                             margin="normal"
