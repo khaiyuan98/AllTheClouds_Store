@@ -3,7 +3,7 @@
 This project is a submission for the technical assessment for City Facilities. The solution has two components – a “front-end” and a “back-end”.
 
 - Front-end: OnlineStore_React_Web (React Web + Vite)
-- Back-end: Web API (ASP.NET Core Web API using .NET 7.0)
+- Back-end: OnlineStore_Web_API (ASP.NET Core Web API using .NET 7.0)
 
 ## The Problem
 
