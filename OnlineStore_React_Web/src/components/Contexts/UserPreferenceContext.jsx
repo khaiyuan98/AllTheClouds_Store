@@ -10,6 +10,11 @@ export const UserPreferenceProvider = ({ children }) => {
 
     const [currencySymbol, setCurrencySymbol] = useState('$');
 
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        const savedMode = localStorage.getItem('darkMode');
+        return savedMode == 'true';
+    });
+
     useEffect(() => {
         console.log('saving currency');
         localStorage.setItem('currency', currency);
@@ -21,8 +26,13 @@ export const UserPreferenceProvider = ({ children }) => {
 
     }, [currency])
 
+    useEffect(() => {
+        console.log('saving mode');
+        localStorage.setItem('darkMode', isDarkMode);
+    }, [isDarkMode])
+
     return (
-        <UserPreferenceContext.Provider value={{ currency, setCurrency, currencySymbol }}>
+        <UserPreferenceContext.Provider value={{ currency, setCurrency, currencySymbol, isDarkMode, setIsDarkMode }}>
             {children}
         </UserPreferenceContext.Provider>
     );
