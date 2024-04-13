@@ -93,11 +93,16 @@ export const OrderList = () => {
                                 return (
                                     <Box key={product.productId}>
                                         <ListItem alignItems="flex-start" >
-                                            <ListItemText
-                                                primary={product.name}
-                                                secondary={product.description}
-                                            />
-                                            <Stack direction="row" alignItems="center" spacing={2}>
+                                            <Stack direction={{ xs: 'column', lg: 'row' }}
+                                                alignItems={{ xs: 'flex-start', lg: 'center' }}
+                                                spacing={{ xs: 1, lg: 2 }}
+                                                justifyContent="space-between"
+                                                sx={{ width: '100%' }}
+                                            >
+                                                <ListItemText
+                                                    primary={product.name}
+                                                    secondary={product.description}
+                                                />
                                                 <Typography
                                                     sx={{ display: 'inline' }}
                                                     component="span"
@@ -106,10 +111,12 @@ export const OrderList = () => {
                                                 >
                                                     {currencySymbol}{formatCurrency(product.unitPrice * order.quantity)}
                                                 </Typography>
-                                                <QuantityInput defaultValue={order.quantity} min={1} max={product?.maximumQuantity ?? 999} onChangeHandler={(value) => updateCart(order.productId, value)} />
-                                                <IconButton aria-label="delete" color="error" onClick={() => updateCart(order.productId, 0)}>
-                                                    <DeleteIcon />
-                                                </IconButton>
+                                                <Stack direction="row" alignItems="center" spacing={2}>
+                                                    <QuantityInput defaultValue={order.quantity} min={1} max={product?.maximumQuantity ?? 999} onChangeHandler={(value) => updateCart(order.productId, value)} />
+                                                    <IconButton aria-label="delete" color="error" onClick={() => updateCart(order.productId, 0)}>
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Stack>
                                             </Stack>
                                         </ListItem>
                                         <Divider />
@@ -117,7 +124,7 @@ export const OrderList = () => {
                                 )
                             })
                                 :
-                                <Box className="center" sx={{mt:'10px'}} >
+                                <Box className="center" sx={{ mt: '10px' }} >
                                     <Stack alignItems="center" gap={2}>
                                         <img src={emptyCartImage} style={{ width: '400px', height: 'auto' }} />
                                         <Typography variant="h6">
