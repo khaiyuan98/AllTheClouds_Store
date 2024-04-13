@@ -97,7 +97,7 @@ export const OrderList = () => {
                                                 primary={product.name}
                                                 secondary={product.description}
                                             />
-                                            <Stack direction="row" spacing={2}>
+                                            <Stack direction="row" alignItems="center" spacing={2}>
                                                 <Typography
                                                     sx={{ display: 'inline' }}
                                                     component="span"
