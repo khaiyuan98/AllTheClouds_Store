@@ -1,6 +1,7 @@
 using AllTheClouds_Web_API.Services;
 using AutoMapper;
 using OnlineStore_Web_API;
+using OnlineStore_Web_API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,12 @@ builder.Services.AddCors(c =>
 // Add AllTheClouds Services
 builder.Services.AddScoped<IStoreService, StoreService>();
 
+// Swagger Configuration
+builder.Services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+{
+    Title = "Online Store Web API"
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,5 +56,18 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Use the Exception Middleware
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+app.UseExceptionMiddleware();
 
 app.Run();

@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShoppingCartContext from "../components/Contexts/ShoppingCartContext";
-import { ProductList } from "../components/ProductList";
+import { ProductList } from "../components/Shop/ProductList";
 import { Box, Paper, Typography, Button, IconButton } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { OrderListDialog } from "../components/OrderListDialog";
+import { OrderListDialog } from "../components/Shop/OrderListDialog";
 
 
 export const HomePage = () => {
@@ -17,8 +17,8 @@ export const HomePage = () => {
     return (
 
         <Box className="page-container">
-            <Typography variant="h6" noWrap component="div">
-                Cloud Products
+            <Typography variant="h4" noWrap component="div">
+                Product List
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'end', pb: '10px' }} >
                 <IconButton color="primary" onClick={() => setIsDialogOpen(true)} >

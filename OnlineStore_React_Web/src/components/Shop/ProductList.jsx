@@ -1,12 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { List, Divider, Box } from "@mui/material";
-import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 import { ListItem, ListItemText, Typography, Button, Stack, Snackbar, Alert, Skeleton } from "@mui/material";
 import { EditOrderItemDialog } from "./EditOrderItemDialog";
-import ShoppingCartContext from './Contexts/ShoppingCartContext';
-import { formatCurrency } from "../helpers/helpers";
-import UserPreferenceContext from "./Contexts/UserPreferenceContext";
+import ShoppingCartContext from '../Contexts/ShoppingCartContext';
+import { formatCurrency } from "../../helpers/helpers";
+import UserPreferenceContext from "../Contexts/UserPreferenceContext";
 
 
 
@@ -77,39 +76,42 @@ export const ProductList = () => {
                                 return (
                                     <Box key={product.productId}>
                                         <ListItem alignItems="flex-start" >
-                                            <ListItemText
-                                                primary={
-                                                    <>
-                                                        <Typography variant="body2" className="subtitle">
-                                                            {product.name}
-                                                        </Typography>
-                                                        {
-                                                            productInCart != null ?
-                                                                <Typography color="secondary" variant="body2" className="subtitle">
-                                                                    In Cart: {productInCart.quantity} ({currencySymbol}{formatCurrency(product.unitPrice * productInCart.quantity)})
-                                                                </Typography>
-                                                                : ''
-                                                        }
-                                                    </>
-                                                }
-                                                secondary={product.description}
-                                            />
-                                            <Stack direction="row" spacing={2}>
-                                                <Stack spacing={0} alignItems="center">
-                                                    <Typography
-                                                        sx={{ display: 'inline' }}
-                                                        component="span"
-                                                        variant="h6"
-                                                        color="text.primary"
-                                                    >
-                                                        {currencySymbol}{formatCurrency(product.unitPrice)}
-                                                    </Typography>
-                                                    <Button variant="contained"
-                                                        onClick={() => openItemDialog(product)}
-                                                    >
-                                                        Add to Cart
-                                                    </Button>
-                                                </Stack>
+                                            <Stack direction={{ xs: 'column', lg: 'row' }}
+                                                alignItems={{ xs: 'flex-start', lg: 'center' }}
+                                                spacing={{ xs: 1, lg: 2 }}
+                                                justifyContent="space-between"
+                                                sx={{ width: '100%' }}
+                                            >
+                                                <ListItemText
+                                                    primary={
+                                                        <>
+                                                            <Typography variant="body2" className="subtitle">
+                                                                {product.name}
+                                                            </Typography>
+                                                            {
+                                                                productInCart != null ?
+                                                                    <Typography color="secondary" variant="body2" className="subtitle">
+                                                                        In Cart: {productInCart.quantity} ({currencySymbol}{formatCurrency(product.unitPrice * productInCart.quantity)})
+                                                                    </Typography>
+                                                                    : ''
+                                                            }
+                                                        </>
+                                                    }
+                                                    secondary={product.description}
+                                                />
+                                                <Typography
+                                                    sx={{ display: 'inline' }}
+                                                    component="span"
+                                                    variant="h6"
+                                                    color="text.primary"
+                                                >
+                                                    {currencySymbol}{formatCurrency(product.unitPrice)}
+                                                </Typography>
+                                                <Button variant="contained"
+                                                    onClick={() => openItemDialog(product)}
+                                                >
+                                                    Add to Cart
+                                                </Button>
                                             </Stack>
                                         </ListItem>
                                         {index < products.length - 1 ? <Divider /> : ''}

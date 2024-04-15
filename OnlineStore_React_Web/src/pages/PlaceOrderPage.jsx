@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import ShoppingCartContext from "../components/Contexts/ShoppingCartContext";
 import { Box, Paper, Typography, Button, TextField, Snackbar, Alert } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import { OrderList } from '../components/OrderList';
+import { OrderList } from '../components/Shop/OrderList';
 import { validateEmail } from '../helpers/helpers';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
@@ -34,13 +34,7 @@ export const PlaceOrderPage = () => {
         })
             .then(() => {
                 clearCart();
-
-                setAlertSettings({
-                    message: 'Your order has been submitted',
-                    severity: 'success'
-                });
-
-                setIsAlertOpen(true);
+                navigate('/ordercomplete');
             })
             .catch(() => {
                 setAlertSettings({
@@ -88,15 +82,15 @@ export const PlaceOrderPage = () => {
     return (
         <>
             <Box className="page-container">
-                <Typography variant="h6" noWrap component="div">
-                    Finalize Order
+                <Typography variant="h4" noWrap component="div">
+                    Checkout
                 </Typography>
                 <Button
                     startIcon={<ArrowBackIosNewIcon />}
                     onClick={() => navigate('/')}
                     sx={{ mb: '10px' }}
                 >
-                    Back to Products List
+                    Back to Product List
                 </Button>
                 <Paper>
                     <Box>
@@ -105,6 +99,7 @@ export const PlaceOrderPage = () => {
                 </Paper>
                 <Paper>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, padding: '10px' }}>
+                        <Typography>Please fill in your details below to submit your order</Typography>
                         <TextField
                             onChange={(e) => setCustomerName(e.target.value)}
                             margin="normal"

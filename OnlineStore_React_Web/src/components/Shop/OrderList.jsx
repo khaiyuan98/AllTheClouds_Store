@@ -1,12 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { List, Divider, Box } from "@mui/material";
 import axios from 'axios';
-import { ListItem, ListItemText, Typography, Stack, IconButton, Skeleton } from "@mui/material";
-import ShoppingCartContext from './Contexts/ShoppingCartContext';
-import { QuantityInput } from "./MaterialCustom/NumberInput";
+import { ListItem, ListItemText, Typography, Stack, IconButton, Skeleton, Snackbar, Alert } from "@mui/material";
+import ShoppingCartContext from '../Contexts/ShoppingCartContext';
+import { QuantityInput } from "../MaterialCustom/NumberInput";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { formatCurrency } from "../helpers/helpers";
-import UserPreferenceContext from "./Contexts/UserPreferenceContext";
+import { formatCurrency } from "../../helpers/helpers";
+import UserPreferenceContext from "../Contexts/UserPreferenceContext";
+import emptyCartImage from '../../assets/images/empty_cart.png';
 
 export const OrderList = () => {
     const GET_PRODUCTS_URL = import.meta.env.VITE_GET_PRODUCTS_API_URL;
@@ -17,13 +18,21 @@ export const OrderList = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [alertSettings, setAlertSettings] = useState({});
+
     const getProducts = () => {
         setIsLoading(true);
         axios.get(`${GET_PRODUCTS_URL}/${currency}`)
             .then(res => {
                 setProducts(res.data);
             })
-            .catch(error => {
+            .catch(() => {
+                setAlertSettings({
+                    message: 'The products details could not be retrieved',
+                    severity: 'error'
+                });
+                setIsAlertOpen(true);
             })
             .finally(() => {
                 setIsLoading(false);
@@ -84,11 +93,16 @@ export const OrderList = () => {
                                 return (
                                     <Box key={product.productId}>
                                         <ListItem alignItems="flex-start" >
-                                            <ListItemText
-                                                primary={product.name}
-                                                secondary={product.description}
-                                            />
-                                            <Stack direction="row" spacing={2}>
+                                            <Stack direction={{ xs: 'column', lg: 'row' }}
+                                                alignItems={{ xs: 'flex-start', lg: 'center' }}
+                                                spacing={{ xs: 1, lg: 2 }}
+                                                justifyContent="space-between"
+                                                sx={{ width: '100%' }}
+                                            >
+                                                <ListItemText
+                                                    primary={product.name}
+                                                    secondary={product.description}
+                                                />
                                                 <Typography
                                                     sx={{ display: 'inline' }}
                                                     component="span"
@@ -97,17 +111,27 @@ export const OrderList = () => {
                                                 >
                                                     {currencySymbol}{formatCurrency(product.unitPrice * order.quantity)}
                                                 </Typography>
-                                                <QuantityInput defaultValue={order.quantity} min={1} max={product?.maximumQuantity ?? 999} onChangeHandler={(value) => updateCart(order.productId, value)} />
-                                                <IconButton aria-label="delete" color="error" onClick={() => updateCart(order.productId, 0)}>
-                                                    <DeleteIcon/>
-                                                </IconButton>
+                                                <Stack direction="row" alignItems="center" spacing={2}>
+                                                    <QuantityInput defaultValue={order.quantity} min={1} max={product?.maximumQuantity ?? 999} onChangeHandler={(value) => updateCart(order.productId, value)} />
+                                                    <IconButton aria-label="delete" color="error" onClick={() => updateCart(order.productId, 0)}>
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Stack>
                                             </Stack>
                                         </ListItem>
                                         <Divider />
                                     </Box>
                                 )
                             })
-                                : 'Your Order is Empty'}
+                                :
+                                <Box className="center" sx={{ mt: '10px' }} >
+                                    <Stack alignItems="center" gap={2}>
+                                        <img src={emptyCartImage} style={{ width: '400px', height: 'auto' }} />
+                                        <Typography variant="h6">
+                                            Oops! Looks like your cart is empty
+                                        </Typography>
+                                    </Stack>
+                                </Box>}
                         </List>
                 }
                 <Box sx={{ display: 'flex', justifyContent: 'end', padding: '10px' }} >
@@ -115,6 +139,15 @@ export const OrderList = () => {
                         TOTAL: {currencySymbol}{formatCurrency(calculateTotalPrice())}
                     </Typography>
                 </Box>
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    open={isAlertOpen}
+                    onClose={() => setIsAlertOpen(false)}
+                >
+                    <Alert onClose={() => setIsAlertOpen(false)} severity={alertSettings.severity} sx={{ width: '100%' }}>
+                        {alertSettings.message}
+                    </Alert>
+                </Snackbar>
             </Box>
         </>
     )

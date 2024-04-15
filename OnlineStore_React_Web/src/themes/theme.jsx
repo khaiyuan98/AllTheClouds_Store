@@ -11,7 +11,8 @@ const themeSettings = (mode) => ({
                     default: "#f3f3f3"
                 },
                 primary: {
-                    main: '#556cd6',
+                    main: '#5ea9f7',
+                    contrastText: '#fff'
                 },
                 secondary: {
                     main: '#19857b',
@@ -21,8 +22,19 @@ const themeSettings = (mode) => ({
                 },
             }
             : {
-                // palette values for dark mode
-
+                // palette values for light mode
+                background: {
+                    default: "#343434"
+                },
+                primary: {
+                    main: '#5ea9f7',
+                },
+                secondary: {
+                    main: '#19857b',
+                },
+                error: {
+                    main: red.A400,
+                },
             }),
     },
 });
