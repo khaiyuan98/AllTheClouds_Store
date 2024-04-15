@@ -38,9 +38,14 @@ Before you begin, ensure you have met the following requirements:
 To install and run this project, follow these steps:
 
 1. Clone the repository:
-   - git clone https://github.com/khaiyuan98/AllTheClouds_Store.git
+   
+   `git clone https://github.com/khaiyuan98/AllTheClouds_Store.git`
+   
 3. Navigate to the project directory
 4. Open the project in your preferred code editor.
 5. Ensure you have Node.js and npm installed on your machine.
-6. Build the React frontend: npm install
-7. Back in the project root, build and run both projects
+6. Build the React frontend:
+   
+   `npm install`
+   
+8. Back in the project root, build and run both projects
