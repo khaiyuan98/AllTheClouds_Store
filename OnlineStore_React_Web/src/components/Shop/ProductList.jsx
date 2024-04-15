@@ -76,8 +76,8 @@ export const ProductList = () => {
                                 return (
                                     <Box key={product.productId}>
                                         <ListItem alignItems="flex-start" >
-                                            <Stack direction={{ xs: 'column', lg: 'row' }}
-                                                alignItems={{ xs: 'flex-start', lg: 'center' }}
+                                            <Stack direction={{ xs: 'column', md: 'row' }}
+                                                alignItems={{ xs: 'flex-start', md: 'center' }}
                                                 spacing={{ xs: 1, lg: 2 }}
                                                 justifyContent="space-between"
                                                 sx={{ width: '100%' }}
@@ -98,6 +98,7 @@ export const ProductList = () => {
                                                         </>
                                                     }
                                                     secondary={product.description}
+                                                    sx={{maxWidth:'70%'}}
                                                 />
                                                 <Typography
                                                     sx={{ display: 'inline' }}

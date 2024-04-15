@@ -22,7 +22,7 @@ const themeSettings = (mode) => ({
                 },
             }
             : {
-                // palette values for light mode
+                // palette values for dark mode
                 background: {
                     default: "#343434"
                 },

@@ -16,7 +16,7 @@ export const OrderCompletePage = () => {
                     <Paper sx={{ width: '50%', padding: '15px' }} >
                         <Stack alignItems="center" gap={2}>
                             <img src={orderCompleteImage} style={{ width: '400px', height: 'auto' }} />
-                            <Typography variant="h2">
+                            <Typography variant="h5">
                                 Your order has been submitted!
                             </Typography>
                             <Button
